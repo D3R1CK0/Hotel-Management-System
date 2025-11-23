@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Lottie from "lottie-react";
 import animation from "../assets/authPage/animation.json";
-import animation from "../assets/authPage/signupAnimation.json";
+import signupAnimation from "../assets/authPage/signupAnimation.json";
 const Auth = () => {
   const [isLogin, setisLogin] = useState(true);
   return (
@@ -27,18 +27,23 @@ const Auth = () => {
           </div>
           <div>
             <div className="mt-12 flex flex-col items-center">
-              <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
+              {isLogin? <h1 className="text-2xl xl:text-3xl font-extrabold">Sign In</h1>: <h1 className="text-2xl xl:text-3xl font-extrabold">Sign Up</h1>}
+             
               <div className="w-full flex-1 mt-8">
                 <div className="flex flex-col items-center">
-                  <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
-                    <span className="ml-4">Sign Up with Google</span>
-                  </button>
+                  {isLogin?<button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                    <span className="ml-4">Or Sign Up with Google</span>
+                  </button>:<button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                    <span className="ml-4">Or Sign In with Google</span>
+                  </button>}
                 </div>
 
                 <div className="my-12 border-b text-center">
-                  <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-                    Prefer email? Click here to register
-                  </div>
+                  {isLogin?<div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                    Prefer email? Click here to<span onClick={()=>setisLogin(false)} className="text-blue-600 cursor-pointer hover:underline"> register</span> 
+                  </div>:<div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                    Already have an account? <span onClick={()=>setisLogin(true)} className="text-blue-600 cursor-pointer hover:underline">Sign In</span> 
+                  </div>}
                 </div>
 
                 <div className="mx-auto max-w-xs">
@@ -53,7 +58,7 @@ const Auth = () => {
                     placeholder="Password"
                   />
                   <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                    <span className="ml-3">Sign In</span>
+                    <span className="ml-3">{isLogin?"Sign In":"Sign Up"}</span>
                   </button>
                   <p className="mt-6 text-xs text-gray-600 text-center">
                     I agree to abide by templatana's
