@@ -4,6 +4,7 @@ import animation from "../assets/authPage/animation.json";
 import signupAnimation from "../assets/authPage/signupAnimation.json";
 const Auth = () => {
   const [isLogin, setisLogin] = useState(true);
+  const [passwordConfirm,setPasswordConfirm]=useState(false);
   return (
     <>
       <div className="container max-w-5xl mx-auto flex justify-center p-6 rounded-4xl shadow-2xl mt-12">
@@ -47,16 +48,40 @@ const Auth = () => {
                 </div>
 
                 <div className="mx-auto max-w-xs">
-                  <input
+                  {isLogin?<input
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="email"
-                    placeholder="Email"
-                  />
-                  <input
+                    placeholder="Username"
+                  />:<input
+                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="email"
+                    placeholder="Enter Your Email"
+                  />}
+                  {isLogin?<input
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     type="password"
                     placeholder="Password"
+                  />:<input
+                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    type="password"
+                    placeholder="Create Password"
+                     onChange={(e) => {
+                      if (e.target.value===""){
+                        setPasswordConfirm(false)
+                      }else{
+                        setPasswordConfirm(true)
+                      }
+                     }
+                    }
+                  />}
+                  
+                  {!isLogin && passwordConfirm &&(
+                    <input
+                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    type="password"
+                    placeholder="Confirm Password"
                   />
+                  )}
                   <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <span className="ml-3">{isLogin?"Sign In":"Sign Up"}</span>
                   </button>
