@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import Lottie from "lottie-react";
 import animation from "../assets/authPage/animation.json";
 import signupAnimation from "../assets/authPage/signupAnimation.json";
+import Loadingjson from "../components/Loadingjson";
+import { Navigate } from "react-router-dom";
+
 const Auth = () => {
   const [isLogin, setisLogin] = useState(true);
   const [passwordConfirm,setPasswordConfirm]=useState(false);
+  const[showLoading,SetShowLoading] =useState(false)
   return (
+    
     <>
+    {showLoading && <Loadingjson />}
       <div className="container max-w-5xl mx-auto flex justify-center p-6 rounded-4xl shadow-2xl mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 items-center ">
           <div className="flex justify-center">
@@ -82,7 +88,16 @@ const Auth = () => {
                     placeholder="Confirm Password"
                   />
                   )}
-                  <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  <button
+                   onClick={()=>{
+                    if(!isLogin){
+                      SetShowLoading(true)
+                      setTimeout(()=>{
+                      <Navigate to="/Register"/>
+
+                      },4000)
+                    }
+                   }} className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <span className="ml-3">{isLogin?"Sign In":"Sign Up"}</span>
                   </button>
                   <p className="mt-6 text-xs text-gray-600 text-center">
